@@ -1,0 +1,147 @@
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.left-nav{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding-left: 10px;
+}
+.right-nav{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    right: 10px;
+    position: absolute;
+}
+.right-nav a{
+    position: relative;
+}
+.right-nav a:hover{
+    color: aqua;
+}
+.right-nav a:hover::before{
+    color: aqua;
+    position: absolute;
+    width: 100%;
+    content: '';
+    width: 50%;
+    height: 3px;
+    background-color: rgba(8, 233, 233, 0.839);
+    left: 25%;
+    bottom:  0;
+    transition: all 0.2s ease-in;
+    animation: nava 0.4s ease-in;
+}
+@keyframes nava {
+    0%{
+        width: 0;
+        left: 0;
+    }
+   
+}
+.navbar-toggler {
+    border: none;
+    font-size: 22px;
+}
+.navbar-toggler:hover {
+    border: none;
+    font-size: 23px;
+}
+.navbar-toggler:focus {
+    border: none;
+    font-size: 23px;
+    box-shadow:none;
+}
+.navbar-toggler:focus .navbar-toggler-icon{
+    background-image:url('../../download.svg')
+}
+.navbar-toggler:hover .navbar-toggler-icon{
+    background-image:url('../../download.svg')
+}
+.navbar-toggler-icon:hover{
+    background-image:url('../../download.svg')
+}
+
+/*  */
+.navbar-collapse.collapse.show{
+    background-color: bisque;
+    position: fixed;
+    width: 26vh;
+    right: 0;
+    top: 0;
+}
+#basic-navbar-nav .close{
+    position: relative;
+    /* width: 25px; */
+    font-size:25px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* #basic-navbar-nav .close:first-child {
+    padding-right: 15px;
+} */
+#basic-navbar-nav .close i{
+    padding: 15px;
+}
+
+.navbar-toggler{
+    right: 169px;
+    z-index: 1000;
+    opacity: 0;
+    position: relative;
+    /* animation: an2 0.2s ease; */
+
+}
+.navbar-toggler.collapsed{
+    right: 0;
+    z-index: 1000;
+    opacity: 1;
+    position:relative;
+    animation: an3 0.2s ease;
+
+}
+
+.collapse:not(.show) {
+    display: none !important;
+}
+.navbar-toggler-icon{
+    animation: aniii 0.2s ease;
+
+}
+.navbar-collapse {
+    flex-basis: 27%;
+    flex-grow: 0;
+    display: block;
+    animation: aniii 0.2s ease;
+    /* position: relative; */
+    /* align-items: flex-end; */
+    /* right: 1px; */
+}
+@keyframes an3 {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes an2 {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes aniii {
+    100%{
+        opacity: 0;
+    }
+}
