@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import Category from '../../components/category-box/Category'
 import Navbarr from '../../components/navbar/Navbarr'
+import SpecialBox from '../../components/special-box/SpecialBox'
 
 const Home = () => {
   return (
@@ -17,7 +18,7 @@ const Home = () => {
             <Category/>
           </section>
           <section className='special-product'>
-            ferfe
+            {/* <SpecialBox/> */}
           </section>
           <section className='comic'>
             ferfe
