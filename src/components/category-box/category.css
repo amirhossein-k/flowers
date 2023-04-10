@@ -334,9 +334,9 @@
   }
   .pseudo-item .body .para a{
     position: relative;
-    top: 4px;
+    /* top: 4px; */
     padding: 5px;
-    left: -136px;
+    /* left: -136px; */
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 1px;

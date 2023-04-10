@@ -52,6 +52,9 @@ font-size: 25px;
 .footer-container .col .box-container .box .e-mail i{
     margin-right: 10px;
 }
+.footer-container .col .box-container .box .e-mail i{
+    margin-right: 3px;
+}
 .footer-container .col-12 .box-title{
     color: aqua;
  }

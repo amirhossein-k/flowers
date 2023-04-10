@@ -84,7 +84,7 @@
     align-items: center;
 }
 #basic-navbar-nav .close .close-toggle{
-    position: relative;
+    /* position: relative; */
     left: 0;
     background-color: aliceblue;
     color: aliceblue;
