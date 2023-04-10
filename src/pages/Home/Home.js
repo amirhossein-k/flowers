@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import Category from '../../components/category-box/Category'
+import Footer from '../../components/footer/Footer'
 import Navbarr from '../../components/navbar/Navbarr'
 import SpecialBox from '../../components/special-box/SpecialBox'
 
@@ -10,22 +11,22 @@ const Home = () => {
         <header>
             <Navbarr/>
         </header>
-        <main >
+        <main style={{backgroundColor: '#ededed',    marginBottom: 10}} >
           <section className='header-img'>
             rt
           </section>
           <section className='category-box-product'>
             <Category/>
           </section>
-          <section className='special-product'>
-            {/* <SpecialBox/> */}
+          {/* <section className='special-product'>
           </section>
           <section className='comic'>
-            ferfe
-          </section>
+            
+          </section> */}
       
         </main>
-        <footer>
+        <footer style={{height: '40vh'}}>
+          <Footer/>
           
         </footer>
     </Container>

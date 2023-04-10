@@ -1,0 +1,25 @@
+.footer-container{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    color: #fff;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+.footer-container .col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.footer-container .col .box-title{
+    position: absolute;
+    top: 49px;
+    left: 116px;
+    border-bottom: 1px solid;
+}
+.footer-container .box-container .col-12{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

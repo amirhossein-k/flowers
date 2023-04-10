@@ -73,6 +73,7 @@
     width: 26vh;
     right: 0;
     top: 0;
+   z-index: 999;
 }
 #basic-navbar-nav .close{
     position: relative;
@@ -82,6 +83,12 @@
     justify-content: space-between;
     align-items: center;
 }
+#basic-navbar-nav .close .close-toggle{
+    position: relative;
+    left: 0;
+    background-color: aliceblue;
+    color: aliceblue;
+}
 /* #basic-navbar-nav .close:first-child {
     padding-right: 15px;
 } */
@@ -90,10 +97,11 @@
 }
 
 .navbar-toggler{
-    right: 169px;
+    
     z-index: 1000;
     opacity: 0;
-    position: relative;
+    position: absolute;
+    left: 0;
     /* animation: an2 0.2s ease; */
 
 }

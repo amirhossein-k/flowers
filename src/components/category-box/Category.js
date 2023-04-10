@@ -20,6 +20,15 @@ const categorynew = [
     {src: pony,titlecategory: 'سبد',price:100},
 
 ]
+const magazine = [
+    {src: pony,titlecategory: 'سبد',paraph:'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
+    {src: pony,titlecategory: 'سبد',paraph:'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
+    {src: pony,titlecategory: 'سبد',paraph:'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
+    {src: pony,titlecategory: 'سبد',paraph:'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
+    {src: pony,titlecategory: 'سبد',paraph:'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' },
+
+
+]
 const Category = () => {
 
     // window.onresize  = function () {
@@ -59,7 +68,8 @@ const Category = () => {
             <p className='title'>جدیدترین محصولات</p>
         {categorynew.map((item,index)=>{
                return(
-                <Col sm={3}  key={index} style={{backgroundColor:'red'}}>
+                <Col sm={3}  key={index} >
+                    <a>
                     <div className='box' >
                         <div className='img-box'>
                             <img src={item.src}/>
@@ -69,9 +79,40 @@ const Category = () => {
                             <span>{item.price}</span>
                         </div>
                     </div>
+                    </a>
                  </Col>
                )
             })}
+        </div>
+        {/*  */}
+        <p className='title_mag'>مجلات</p>
+        <div class="outer-wrapper row">
+                       
+
+          <div class="inner-wrapper row-cols-1" style={{margin:'0px !important'}}>
+            {/* <p className='title'>مجلات</p> */}
+        {magazine.map((item,index)=>{
+               return(
+                <a class="pseudo-item col-sm-6 col-lg-3 col-12 " dir="rtl">
+                <div class="box_img">
+                   <div className='box'> 
+                   <img src={pony}/>
+                   </div>
+                </div>
+                <div class="body">
+                    <div class="title">پالونیا</div>
+                    <div class="cal">تاذیخ</div>
+                    <div class="para">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                         Necessitatibus, ipsam beatae.
+                         <a>بیشتر...</a>
+                    </div>
+                </div>
+            </a>
+               )
+            })}
+            </div>
+           
         </div>
 
     </div>

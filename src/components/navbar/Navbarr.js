@@ -8,6 +8,23 @@ const Navbarr = () => {
 const[isOpen,setIsOpen]=useState(true)
 
 
+useEffect(()=>{
+  const navv = document.querySelector('.navbar-toggler')
+  const close = document.querySelector('.close')
+  
+
+  const u =navv.childNodes
+  const u_copy = u[0].cloneNode(true)
+  const ii = navv.cloneNode(true)
+  ii.style.backgroundColor="blue"
+  
+//   ii.append(u_copy)
+
+//  close.append(ii)
+
+
+//   console.log(ii)
+},[])
 
 useEffect(() => {
   console.log(navClose)
@@ -34,6 +51,8 @@ useEffect(() => {
         <span className='close'dir='rtl'>
           <i>منو</i>
           <i className="bi bi-x-lg"  style={{background:'red'}}></i>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='close-toggle'/>
+
         </span>
       <Nav className='d-flex d-lg-none'>
        <Nav.Link href="#home">مجله</Nav.Link>
