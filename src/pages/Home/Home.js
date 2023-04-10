@@ -25,7 +25,7 @@ const Home = () => {
           </section> */}
       
         </main>
-        <footer style={{height: '40vh'}}>
+        <footer >
           <Footer/>
           
         </footer>
