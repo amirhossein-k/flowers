@@ -1,0 +1,110 @@
+.productcard-container{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    margin: 50px 0;
+}
+.productcard-container .filter-container{
+    /* margin: 0 auto; */
+
+}
+.productcard-container  .col-11 {
+    margin: 0 auto;
+
+}
+.productcard-container .filter-container .filter-box{
+    display: flex;
+    gap: 10px;
+    border:1px solid #dbdbdb;
+    padding: 15px;
+    /* margin: 0 auto; */
+    position: relative;
+
+}
+.productcard-container .filter-container .filter-box a{
+    position: relative;
+
+}
+.productcard-container .filter-container .filter-box a:hover{
+    cursor: pointer;
+    color: rgb(7, 188, 188);
+
+}
+.productcard-container .filter-container .filter-box a:hover::before{
+    color: aqua;
+    position: absolute;
+    width: 100%;
+    content: '';
+    width: 50%;
+    height: 3px;
+    background-color: rgba(8, 233, 233, 0.839);
+    left: 25%;
+    bottom:  -5px;
+    transition: all 0.2s ease-in;
+    animation: nava 0.4s ease-in;
+}
+@keyframes nava {
+    0%{
+        width: 0;
+        left: 0;
+    }
+   
+}
+/*card  */
+.productcard-container .card-container .card-box{
+    display: flex;
+    /* gap: 10px; */
+    /* border:1px solid #dbdbdb; */
+    padding: 15px 0;
+    /* margin: 0 auto; */
+    position: relative;
+    --bs-gutter-x: 0rem;
+
+}
+.productcard-container .card-container .card-box {
+    width: 100%;
+}
+.productcard-container .card-container .card-box .box {
+    width: 100%;
+    padding: 20px;
+    border:1px solid rgb(227, 227, 227);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+.productcard-container .card-container .card-box .box .image-box {
+    height: 120px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.productcard-container .card-container .card-box .box .image-box  img{
+    width: 100%;
+    height: 100%;
+}
+
+.productcard-container .card-container .card-box .box .body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.productcard-container .card-container .card-box .box .footer{
+ color: aqua;
+ display: none;
+}
+/* hover card */
+.productcard-container .card-container .card-box .box:hover {
+box-shadow: 1px 1px 2px rgb(153 171 203 / 84%);
+cursor: pointer;
+}
+.productcard-container .card-container .card-box .box:hover .footer{
+ color: aqua;
+ display: flex;
+}
+.productcard-container .card-container .card-box .box:hover .image-box img{
+    transform: scale(1.2);
+}

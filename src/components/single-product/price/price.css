@@ -1,0 +1,10 @@
+.price-container{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    padding: 10px;
+}
+.price-container p{
+   display: flex;
+   justify-content: center;
+   align-items:center;
+}

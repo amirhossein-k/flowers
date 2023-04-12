@@ -50,7 +50,7 @@ useEffect(() => {
         <Navbar.Collapse id="basic-navbar-nav" >
         <span className='close'dir='rtl'>
           <i>منو</i>
-          <i className="bi bi-x-lg"  style={{background:'red'}}></i>
+          <i className="bi bi-x-lg close" ></i>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className='close-toggle'/>
 
         </span>
