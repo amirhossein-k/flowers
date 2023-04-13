@@ -4,6 +4,24 @@
     --bs-gutter-y: 0;
 }
 
+.navbar-brand{
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    align-items: center;
+}
+.navbar-brand span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+}
+.navbar-brand span:hover{
+cursor: pointer;
+
+}
+
 .left-nav{
     display: flex;
     flex-direction: row;

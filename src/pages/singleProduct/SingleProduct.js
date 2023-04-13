@@ -2,8 +2,9 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import Footer from '../../components/footer/Footer'
 import Navbarr from '../../components/navbar/Navbarr'
-import Ask from '../../components/single-category/ask/Ask'
+// import Ask from '../../components/single-category/ask/Ask'
 import ProductCard from '../../components/single-category/productCard/ProductCard'
+import Describtaion from '../../components/single-product/describtaion/Describtaion'
 import Detail from '../../components/single-product/detail/Detail'
 import Price from '../../components/single-product/price/Price'
 
@@ -23,7 +24,7 @@ const SingleProduct = () => {
       
       
       <section className='ask'>
-          <Ask/>
+          <Describtaion/>
       </section>
   
     </main>

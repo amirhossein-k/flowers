@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import './navbar.css'
+import { useNavigate, generatePath, Link } from "react-router-dom";
 const Navbarr = () => {
-
+  const navigate = useNavigate();
   const [navClose,setNavClose]=useState(true)
 // console.log(navClose)
 const[isOpen,setIsOpen]=useState(true)
@@ -33,13 +34,15 @@ useEffect(() => {
     
     <Navbar expand='lg' dir='ltr'>
       {/* <Container> */}
-      <Navbar.Brand>
-      <Nav className='left-nav'>
+      <Navbar.Brand >
+          <Nav className='left-nav'>
             <Nav.Link href="#home"><i className="bi bi-cart"></i></Nav.Link>
             <Nav.Link href="#home"><i className="bi bi-person"></i></Nav.Link>
             <Nav.Link href="#home"><i className="bi bi-search"></i></Nav.Link>
           </Nav>
+          <span onClick={(e) => navigate(`/`)}>phhos</span>
       </Navbar.Brand>
+     
       <Nav className={`right-nav d-none d-lg-flex `} >
             <Nav.Link href="#home">خرید گل</Nav.Link>
             <Nav.Link href="#home">مناسبت ها</Nav.Link>

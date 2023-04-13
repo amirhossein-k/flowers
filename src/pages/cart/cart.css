@@ -1,0 +1,11 @@
+main .price{
+    /* width: 50%; */
+}
+
+main .other-things .title-outer-things{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+
+}
