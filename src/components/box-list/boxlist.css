@@ -22,3 +22,25 @@
     height: 50%;
 
 }
+.box-outer .pseudo-boxlist{
+    background-color: rgb(237 237 237);
+    border: 1px black dotted;
+}
+.box-outer .pseudo-boxlist:nth-child(2n){
+color: black;
+
+
+
+}
+.box-outer .pseudo-boxlist:nth-child(2n) .body-boxlist .title-boxlist{
+color: black;
+
+
+
+}
+.box-outer .pseudo-boxlist:nth-child(2n) .body-boxlist .cal-boxlist{
+color: black;
+
+
+
+}

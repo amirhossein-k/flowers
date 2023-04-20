@@ -23,7 +23,7 @@ const BoxList = () => {
       {/* <p className='title'>مجلات</p> */}
   {magazine.map((item,index)=>{
          return(
-          <a class="pseudo-item col-sm-6 col-lg-3 col-12 " dir="rtl">
+          <a class="pseudo-item col-sm-3 col-lg-2 col-12 pseudo-boxlist" dir="rtl">
           <div class="box_img" style={{height:150}}>
              <div className='box'> 
              <img src={pony}/>

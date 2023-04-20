@@ -1,0 +1,66 @@
+.form-buy .formbuy-container{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+.form-buy .formbuy-container .form-container .form{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255,0.7);
+
+}
+.form-buy .formbuy-container .form-container .form .form-control{
+position: relative;
+
+}
+.form-buy .formbuy-container .form-container .form .form-control:focus  {
+    
+    /* border:2px solid black; */
+    border-width: 3px;
+    animation: border_ani 2s ease  infinite;
+  
+   
+    box-shadow: 1px 1px 5px 0px rgba(211, 211, 211, 0.353);
+
+    border-color: transparent;
+
+}
+
+@keyframes  border_ani{
+    0%{
+        border-bottom-color: rgb(0, 81, 255);
+        border-left-color: rgb(228, 228, 228);
+        border-top-color: rgb(228, 228, 228);
+        border-right-color: rgb(228, 228, 228);
+        box-shadow: 1px 1px 5px 0px rgba(211, 211, 211, 0.653);
+    }
+    100%{
+        border-bottom-color: rgb(50, 205, 236);
+    }
+}
+
+
+.form-buy .formbuy-container .form-container .form .box-dahande{
+/* background-color: rgb(255, 255, 255); */
+/* margin:10px 0; */
+padding:10px 5px;
+}
+
+.form-buy .formbuy-container .form-container .form .box-dahande .title{
+    font-size: 20px;
+    font-weight: 500;
+}
+/*  */
+.form-buy .formbuy-container .form-container .form .box-girandeh {
+    /* background-color: rgb(255, 255, 255); */
+
+    /* margin:10px 0; */
+    padding:10px 5px;
+}
+
+.form-buy .formbuy-container .form-container .form .box-girandeh .title{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
