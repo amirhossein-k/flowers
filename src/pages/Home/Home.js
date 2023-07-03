@@ -1,4 +1,5 @@
 import React from 'react'
+import { memo } from 'react'
 import { Container } from 'react-bootstrap'
 import Category from '../../components/category-box/Category'
 import Footer from '../../components/footer/Footer'
@@ -11,7 +12,8 @@ const Home = () => {
         <header>
             <Navbarr/>
         </header>
-        <main style={{backgroundColor: '#ededed',    marginBottom: 10}} >
+        {/* <main style={{backgroundColor: '#ededed',    marginBottom: 10}} > */}
+        <main>
           <section className='header-img'>
             rt
           </section>
@@ -33,4 +35,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default memo(Home)

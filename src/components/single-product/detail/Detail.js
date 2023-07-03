@@ -4,15 +4,18 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import pony from '../../../pony.jpg'
 import headerp from '../../../header-asl.jpg'
-const Detail = () => {
+const Detail = ({targetProduct}) => {
   return (
     <div className='row detail-container' dir='rtl'>
       <div className='col-12 col-sm-6 '>
       <AwesomeSlider>
-    <div><img src={pony}/></div>
-    <div><img src={headerp}/></div>
-    <div><img src={pony}/></div>
-    <div><img src={headerp}/></div>
+      {targetProduct &&  targetProduct ? targetProduct.pic.map((item,index)=>{
+        return <div><img src={item}/></div>
+      }) : (<div><img src={pony}/></div>)}
+    {/* <div><img src={targetProduct.pic}/></div> */}
+    {/* <div><img src={headerp}/></div> */}
+    {/* <div><img src={pony}/></div>
+    <div><img src={headerp}/></div> */}
     
   </AwesomeSlider>
 
@@ -23,19 +26,19 @@ const Detail = () => {
             <div className='col-12 col-lg-4'>
               <div className='box'>
                 <p>طول</p>
-                <p>120</p>
+                <p>{targetProduct?.detail[0].length}</p>
               </div>
             </div>
             <div className='col-12 col-lg-4'>
             <div className='box'>
                 <p>عرض</p>
-                <p>150</p>
+                <p>{targetProduct?.detail[0].width}</p>
               </div>
             </div>
             <div className='col-12 col-lg-4'>
               <div className='box'>
                   <p>ارتفاع</p>
-                  <p>100</p>
+                  <p>{targetProduct?.detail[0].height}</p>
                 </div>
             </div>
             <div className='col-12 '>
@@ -43,7 +46,17 @@ const Detail = () => {
                   <p>توضیحات تکمیلی</p>
                   <p>حمل این محصول به سراسر تهران رایگان می‌باشد.
 
-                 <span> گیاه یک موجود زنده میباشد پس در نتیجه محصول شما دقیقا مطابق عکس داخل سایت نمی‌باشد.</span>
+                 {/* <span>{targetProduct?.describrtion?.map((item,index)=>{
+                    switch(item.type){
+                        case 'a':
+                          return <a>{item.body}</a>
+                        case 'p':
+                          return <p>{item.body}</p>
+                        default:
+                          return 'aaa'
+                    }
+                  
+                 })}</span> */}
 
 
                   </p>

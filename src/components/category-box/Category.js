@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col } from 'react-bootstrap'
 import "./category.css"
 import pony from '../../pony.jpg'
-
-
-const category = [
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'},
-    {src: pony,titlecategory: 'سبد'}
-]
+import {useDispatch,useSelector} from 'react-redux'
+import {listCategory} from '../../actions/categoryAction'
+import { memo } from 'react'
+import {productContext} from '../../App'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 const categorynew = [
     {src: pony,titlecategory: 'سبد',price:100},
     {src: pony,titlecategory: 'سبد',price:100},
@@ -30,7 +25,22 @@ const magazine = [
 
 ]
 const Category = () => {
-
+    const [productCon , setProductCon] = useContext(productContext)
+    
+    
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    // get list category
+    const categoryList = useSelector(state=>state.categoryList)
+    const {loading,error,category} = categoryList
+    // get list product
+    // const productList = useSelector(state=>state.productList)
+    // const {loadingProduct,errorProduct,product} = productList
+    
+  
+    // useEffect(()=>{
+        
+    // },[category,product])
     // window.onresize  = function () {
     //     if(window.innerWidth<678){
     //         const row = document.querySelector('.category-container')
@@ -46,63 +56,75 @@ const Category = () => {
     //     }
         
     //   };
-
+   
   return (
     <div className='category-container row'>
 
         {/*  */}
         <div className='row list-gat-box'>
-            {category.map((item,index)=>{
-               return(
-                <Col sm={4} lg={2} key={index} >
-                    <div className='box' >
-                        <img src={item.src}/>
-                        <span>{item.titlecategory}</span>
-                    </div>
-                </Col>
-               )
-            })}
+        {category && category.category.map((i,index)=>{
+
+                return(
+                 <Col sm={4} lg={2} key={index} >
+                     <div className='box' >
+                         <img src={i.pic}/>
+                         <span className='title_category'>{i.title}</span>
+                     </div>
+                 </Col>
+                )
+            })
+        }
+            
         </div>
         {/*  */}
         <div className='row new-pro-box'>
             <p className='title'>جدیدترین محصولات</p>
-        {categorynew.map((item,index)=>{
-               return(
-                <Col sm={3}  key={index} >
+        {productCon   &&
+
+       
+        productCon?.slice(productCon.length -4, productCon.length)
+        .map((item,index)=>{
+            
+            return (
+                <Col sm={3} key={index} onClick={(e) => navigate(`/product/${item._id}`)}>
                     <a>
-                    <div className='box' >
-                        <div className='img-box'>
-                            <img src={item.src}/>
-                        </div>
-                        <div className='body'>
-                            <span>{item.titlecategory}</span>
-                            <span>{item.price}</span>
-                        </div>
-                    </div>
-                    </a>
-                 </Col>
-               )
-            })}
+                     <div className='box' >
+                         <div className='img-box'>
+                             <img src={item.pic[0]}/>
+                         </div>
+                         <div className='body'>
+                             <span>{item.title}</span>
+                             <span>{item.price}</span>
+                         </div>
+                     </div>
+                     </a>
+                </Col>
+            )
+        })
+        
+        
+            
+        }
         </div>
         {/*  */}
         <p className='title_mag'>مجلات</p>
-        <div class="outer-wrapper row">
+        <div className="outer-wrapper row">
                        
 
-          <div class="inner-wrapper row-cols-1" style={{margin:'0px !important'}}>
+          <div className="inner-wrapper row-cols-1" style={{margin:'0px !important'}}>
             {/* <p className='title'>مجلات</p> */}
         {magazine.map((item,index)=>{
                return(
-                <a class="pseudo-item col-sm-6 col-lg-3 col-12 " dir="rtl">
-                <div class="box_img">
+                <a className="pseudo-item col-sm-6 col-lg-3 col-12 " dir="rtl">
+                <div className="box_img">
                    <div className='box'> 
                    <img src={pony}/>
                    </div>
                 </div>
-                <div class="body">
-                    <div class="title">پالونیا</div>
-                    <div class="cal">تاذیخ</div>
-                    <div class="para">
+                <div className="body">
+                    <div className="title">پالونیا</div>
+                    <div className="cal">تاذیخ</div>
+                    <div className="para">
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                          Necessitatibus, ipsam beatae.
                          <a>بیشتر...</a>
@@ -119,4 +141,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default memo(Category)

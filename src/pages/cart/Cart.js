@@ -8,7 +8,7 @@ import './cart.css'
 
 const Cart = () => {
   return (
-    <Container fluid style={{margin:"0 !important",padding:"0 !important"}} dir="rtl">
+    <Container fluid style={{margin:"0 !important",padding:"0 !important"}} className="cart">
     <header>
         <Navbarr/>
     </header>
