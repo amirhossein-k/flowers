@@ -1,20 +1,59 @@
-import React, { useState,useEffect, memo } from 'react'
+import React, { useState,useEffect, memo, useContext } from 'react'
 // import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import './navbar.css'
-import { useNavigate, generatePath, Link } from "react-router-dom";
+import { useNavigate, generatePath, Link, json } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, Offcanvas, Form, FormControl,Button } from 'react-bootstrap';  
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import { useSelector,useDispatch } from 'react-redux';
 import { logout } from '../../actions/userAction';
 import Modals from '../modals/Modals';
+import { productContext } from '../../App';
 
 const Navbarr = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [navClose,setNavClose]=useState(true)
+  const [productCon , setProductCon] = useContext(productContext)
 // console.log(navClose)
 const[isOpen,setIsOpen]=useState(false)
+const[isOpenCart,setIsOpenCart]=useState(false)
+const [cartItemOrder,setCartItemOrder] = useState(0)
+const [cartItem,setCartItem] = useState([])
 
+
+// console.log(productCon,'productCon')
+const cart = useSelector(state=>state.cart)
+const {loading:loadingCart ,cart:cartMessage ,error:errorCart} = cart
+
+
+const  cartorder =JSON.parse(localStorage.getItem('cartlist')) 
+
+
+
+var plus = 0
+
+useEffect(()=>{
+  
+  
+ 
+  if(cartorder && cartorder.length >0 ){
+    // setLoading_Cart(true)
+    
+    cartorder.map(item=> plus += item.order)
+  
+    setCartItemOrder(plus )
+   
+   
+    setCartItem(cartorder)
+
+    
+    // setLoading_Cart(false)
+  }
+
+},[loadingCart,cartMessage,isOpenCart])
+
+
+console.log(typeof cartItem,'cartItem')
 const userLogin = useSelector(state=>state.userLogin)
 const {error,loading,userInfo} = userLogin
 
@@ -27,6 +66,24 @@ const logouthandler = ()=>{
   navigate('/register')
 }
 
+const handlerDelete = (e)=>{
+
+  const id = e.target.id
+  const localcart = JSON.parse(localStorage.getItem('cartlist'))
+  const localcartt = JSON.parse(localStorage.getItem('cart'))
+  console.log(localcart,'localcart')
+  localStorage.setItem('cartlist',JSON.stringify( localcart.filter(item=>item.id !==id)))
+  localStorage.setItem('cart',JSON.stringify( localcartt.filter(item=>item.id !==id)))
+  setCartItem(JSON.parse(localStorage.getItem('cartlist')) )
+  
+}
+useEffect(()=>{
+  cartItem.map(item=> plus += item.order)
+  console.log(cartItem,'uu')
+  setCartItemOrder(plus )
+},[cartItem])
+
+
   return (
     <>
     {loading && <Modals/>}
@@ -38,7 +95,9 @@ const logouthandler = ()=>{
               <i
                className="bi bi-cart"
                onClick={()=>setIsOpen(true)}
-               ></i>
+               >
+                <span className='i_numbers'>{cartItem.length>0 &&cartItemOrder &&  cartItemOrder.length > 0?  cartItemOrder : cartItemOrder}</span>
+               </i>
              </Link>
              
             {userInfo  ? (
@@ -119,19 +178,40 @@ const logouthandler = ()=>{
         </div>
         <div className='body'>
           <ul>
-            <li>
+            {cartItem.length >0 &&cartorder&&productCon &&  productCon?.filter(item=>{
+
+var rt= item;
+
+for(var ie =0;ie<cartItem.length;ie++){
+  rt = item._id?.includes(cartItem[ie]?.id)
+  if(rt){
+    return rt
+  }
+}
+
+return rt
+
+})?.map((it,index)=>(
+  <li key={it._id}>
               
-              <div className='img_box'>
-                <img src='https://images.unsplash.com/photo-1558001767-18747c366202?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' />
-              </div>
-              <div className='detail'>
-                <div className='title'>ارکیده</div>
-                <div className='price'>2500</div>
-              </div>
-             
-            </li>
-            <li>amir</li>
-            <li>amir</li>
+  <div className='img_box'>
+    <img src={it.pic[0]} />
+  </div>
+  <div className='detail'>
+    <div className='title'>{it.title}</div>
+    <div className='price'>{it.price}</div>
+  </div>
+  <div className='order'>
+    <div className='title'>تعداد</div>
+    <div className='number'>{cartorder[index]?.order}</div>
+  </div>
+  <div className='icon'>
+    <i class="bi bi-x-lg" onClick={e=>handlerDelete(e)} id={it._id}></i>
+  </div>
+ 
+</li>
+))}
+            
           </ul>
           <div className='footer'>
                 <Link to='/cart'>مشاهده سبد خرید</Link>

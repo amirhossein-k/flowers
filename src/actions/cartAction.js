@@ -1,4 +1,4 @@
-import { ADD_CART_FAIL, ADD_CART_REQUEST, ADD_CART_SUCCESS } from "../constants/cartConstant";
+import { ADD_CART_FAIL, ADD_CART_NULL, ADD_CART_REQUEST, ADD_CART_SUCCESS } from "../constants/cartConstant";
 
 export const addCart = (_id,order) => async (dispatch) => {
     try {
@@ -13,21 +13,16 @@ export const addCart = (_id,order) => async (dispatch) => {
     //     { email, password },
     //     config
     //   );
-    const message = `اضافه شد${_id}`
+    const message = `اضافه شد`
     const cart = {'id': _id,'order':order}
-    var get =[]
-    if(localStorage.getItem('cart').length>0){
-        // get =JSON.parse(localStorage.getItem('cart'))
-        // const objectIndex = get.findIndex(obj=> obj.id === _id)
-        // get[objectIndex].order = order
-        get.push(cart)
-
-    }else{
-        get.push(cart)
-    }
+   
+   
 
       dispatch({ type: ADD_CART_SUCCESS, payload: message });
-      localStorage.setItem("cart", JSON.stringify(get));
+      setTimeout(()=>{
+        dispatch({type:ADD_CART_NULL})
+      },1000)
+      // localStorage.setItem("cart", JSON.stringify(get));
     } catch (error) {
       dispatch({
         type: ADD_CART_FAIL,

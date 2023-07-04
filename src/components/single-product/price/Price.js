@@ -3,14 +3,17 @@ import  './price.css'
 import pony from'../../../pony.jpg'
 import { json, useParams } from 'react-router-dom';
 import { addCart } from '../../../actions/cartAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Price = ({targetProduct}) => {
   const nameUrl = window.location.href;
   const [order,setOrder] = useState(0)
   const { productId } = useParams();
   const dispatch = useDispatch()
- 
+
+  const cartt = useSelector(state=>state.cart)
+  const {loading ,cart:cartMessage ,error:errorCart} = cartt
+
   var get =[]
   var cart = {'id': productId,'order':order}
   var gett2= localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : null;
@@ -114,17 +117,24 @@ const Price = ({targetProduct}) => {
 
    
   },[order])
+  useEffect(()=>{
+    // const cartorder =[]
+    console.log('ooo000000000')
+  //  window.location.reload()
+  
+  },[loading])
   const Addhandler = (e)=>{
     // e.preventDefault()
     // const cart = {'id': productId,'order':order}
+    console.log('افوده شذ')
     if(order !== 0 ) {
       
      
       // dispatch(addCart(productId,order))
       localStorage.setItem("cart", JSON.stringify(get));
       localStorage.setItem('cartlist',JSON.stringify(get))
-
-      // setOrder(0)
+      dispatch(addCart())
+      setOrder(0)
     }
   }
   
@@ -164,74 +174,135 @@ const Price = ({targetProduct}) => {
    
    ): (
     <div className='price-container row' dir='rtl'>
-        <div className='col-12 col-md-6'>
+      {/* list cart */}
+        <div className='col-12 col-md'>
+          <div className='row'>
+            {/* 1 item */}
+            <div className='col-12'>
+              <div className='row'>
 
-        <div className='col-12'>
-          <div className='box-img'>
-            <img src={pony} />
-          </div>
-        </div>
-
-        <div className='col-12'><p>1,550,000 <span>تومان</span></p></div>
-        <div className='col-12'> <p>موجود در انبار</p> </div>
-        <div className='col-12'> 
-   
-          <div className='add-countianer'>
-          {/* <span className='title-add'>افزودن به سبد خرید </span>  */}
-        
-            <div className='box-add'>
-              <div className='inc'>
-                <i className="bi bi-plus"></i>
-              </div>
-              <div className='input'>
-                <input type="text" required  value={1}/>
-              </div>
-           
-                <div className='inc'>
-                  <i className="bi bi-dash"></i>
+                <div className='col-2'>
+                  <div className='box-img'>
+                    <img src={pony} />
+                  </div>
                 </div>
-           
+
+                <div className='col-12'><p>1,550,000 <span>تومان</span></p></div>
+                <div className='col-12'> <p>موجود در انبار</p> </div>
+
+                <div className='col-12'> 
+          
+                  <div className='add-countianer'>
+                  {/* <span className='title-add'>افزودن به سبد خرید </span>  */}
+                
+                    <div className='box-add'>
+                      <div className='inc'>
+                        <i className="bi bi-plus"></i>
+                      </div>
+                      <div className='input'>
+                        <input type="text" required  value={1}/>
+                      </div>
+                  
+                        <div className='inc'>
+                          <i className="bi bi-dash"></i>
+                        </div>
+                  
+                    </div>
+
+                
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            {/* item 2 */}
+            <div className='col-12'>
+              <div className='row'>
+
+                <div className='col-2'>
+                  <div className='box-img'>
+                    <img src={pony} />
+                  </div>
+                </div>
+
+                <div className='col-12'><p>1,550,000 <span>تومان</span></p></div>
+                <div className='col-12'> <p>موجود در انبار</p> </div>
+
+                <div className='col-12'> 
+          
+                  <div className='add-countianer'>
+                  {/* <span className='title-add'>افزودن به سبد خرید </span>  */}
+                
+                    <div className='box-add'>
+                      <div className='inc'>
+                        <i className="bi bi-plus"></i>
+                      </div>
+                      <div className='input'>
+                        <input type="text" required  value={1}/>
+                      </div>
+                  
+                        <div className='inc'>
+                          <i className="bi bi-dash"></i>
+                        </div>
+                  
+                    </div>
+
+                
+                  </div>
+
+                </div>
+              </div>
             </div>
 
-         
           </div>
-        </div>
+
 
         </div>
-        <div className='col-12 col-md-6  my-flex'>
+        {/* price total */}
+        <div className='col-12 col-lg-3  col-md-4  my-flex'>
+          <div className='row'>
+            <div className='col-12'>
 
-          <div className='offer-code'>
-            <div className='box'>
-              <input placeholder='کد'/>
-              <span>اعمال کد تخفیف</span>
+                <div className='offer-code w-100'>
+                  <div className='box'>
+                    <input placeholder='کد'/>
+                    <span>اعمال کد تخفیف</span>
+                  </div>
+                </div>
             </div>
-          </div>
 
-          <div className='total-container'>
+            <div className='col-12'>
 
-            <span className='title'>مجموع کل سبد خرید</span>
+              <div className='total-container w-100'>
 
-            <div className='box-total-price'>
+                <span className='title'>مجموع کل سبد خرید</span>
 
-              <div className='box-price'>
+                <div className='box-total-price'>
 
-                <span>قیمت کل	</span>
-                <span>1,090,000 تومان</span>
+                  <div className='box-price'>
+
+                    <span>قیمت کل	</span>
+                    <span>1,090,000 تومان</span>
+
+                  </div>
+
+                  <div className='box-price'>
+                    <span> پرداختی شما	</span>
+                    <span>1,090,000 تومان</span>
+                  </div>
+
+                </div>
+
+                <div className='button'>
+                  <a >ثبت سفارش</a>
+                </div>
 
               </div>
-
-              <div className='box-price'>
-                <span> پرداختی شما	</span>
-                <span>1,090,000 تومان</span>
-              </div>
-
             </div>
-
-            <div className='button'>
-              <a >ثبت سفارش</a>
-            </div>
-
           </div>
+
+          
+
 
         </div>
 

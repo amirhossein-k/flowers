@@ -5,6 +5,7 @@ import 'react-awesome-slider/dist/styles.css';
 import pony from '../../../pony.jpg'
 import headerp from '../../../header-asl.jpg'
 const Detail = ({targetProduct}) => {
+  console.log(targetProduct,'targetProduct')
   return (
     <div className='row detail-container' dir='rtl'>
       <div className='col-12 col-sm-6 '>
@@ -12,6 +13,7 @@ const Detail = ({targetProduct}) => {
       {targetProduct &&  targetProduct ? targetProduct.pic.map((item,index)=>{
         return <div><img src={item}/></div>
       }) : (<div><img src={pony}/></div>)}
+
     {/* <div><img src={targetProduct.pic}/></div> */}
     {/* <div><img src={headerp}/></div> */}
     {/* <div><img src={pony}/></div>
@@ -20,7 +22,9 @@ const Detail = ({targetProduct}) => {
   </AwesomeSlider>
 
       </div>
-      <div className='col-12 col-sm-6'>
+      {targetProduct &&(
+
+      <div className='col-12 col-sm-6' key={targetProduct._id} >
         <div className='table-container'>
           <div className='row'>
             <div className='col-12 col-lg-4'>
@@ -65,6 +69,7 @@ const Detail = ({targetProduct}) => {
           </div>
         </div>
       </div>
+      )}
     </div>
   )
 }

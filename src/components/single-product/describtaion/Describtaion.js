@@ -14,11 +14,11 @@ const Describtaion = ({targetProduct}) => {
           targetProduct && targetProduct?.describrtion.map((item,index)=>{
             switch(item.type){
               case 'a':
-                return <div className='col-12'><a>{item.body}</a></div> 
+                return <div className='col-12' key={index}><a>{item.body}</a></div> 
               case 'p':
-                return <div className='col-12'><p>{item.body}</p></div>
+                return <div className='col-12' key={index}><p>{item.body}</p></div>
               case 'img':
-                return <div className='col-12' style={{display:'flex',justifyContent: 'center'}}><img src={item.body} style={{    width: '400px'}}/> </div>
+                return <div className='col-12' key={index} style={{display:'flex',justifyContent: 'center'}}><img src={item.body} style={{    width: '400px'}}/> </div>
               default:
                 return ''
           }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { memo } from 'react'
 import { Container } from 'react-bootstrap'
 import Category from '../../components/category-box/Category'
@@ -6,8 +6,15 @@ import Footer from '../../components/footer/Footer'
 import Navbarr from '../../components/navbar/Navbarr'
 import SpecialBox from '../../components/special-box/SpecialBox'
 
+
+
+
+
 const Home = () => {
+
+
   return (
+    
     <Container fluid style={{margin:"0 !important",padding:"0 !important"}}>
         <header>
             <Navbarr/>
@@ -32,6 +39,8 @@ const Home = () => {
           
         </footer>
     </Container>
+
+
   )
 }
 
