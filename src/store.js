@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import {categoryListReducer,categoryListProductReducer} from './reducer/categoryReducer'
 import {logoutReducer,userLoginReducer, userRegister}from './reducer/userReducer'
 import { productCreateReducer, productListReducder } from './reducer/productReducer'
-import { addCart } from './reducer/cartReducer'
+import { addCart, listCart } from './reducer/cartReducer'
 
 const reducer = combineReducers({
     categoryList : categoryListReducer,
@@ -14,7 +14,8 @@ const reducer = combineReducers({
     userRegister: userRegister,
     productList:productListReducder,
     productCreate:productCreateReducer,
-    cart: addCart
+    cart: addCart,
+    listCart: listCart
 
 })
 const midlleware = [thunk]

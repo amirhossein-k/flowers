@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Footer from '../../components/footer/Footer'
 import Navbarr from '../../components/navbar/Navbarr'
@@ -6,8 +6,14 @@ import HeaderCategory from '../../components/single-category/header/HeaderCatego
 import ProductCard from '../../components/single-category/productCard/ProductCard'
 import Ask from '../../components/single-category/ask/Ask'
 
+export const cartContext = createContext()
+ 
+
 const SingleCategory = () => {
+
+  const [cartTarget,setCartTarget]= useState([])
   return (
+    <cartContext.Provider value={[cartTarget,setCartTarget]}>
     <Container fluid style={{margin:"0 !important",padding:"0 !important"}}>
         <header>
             <Navbarr/>
@@ -30,6 +36,7 @@ const SingleCategory = () => {
           
         </footer>
     </Container>
+    </cartContext.Provider>
   )
 }
 

@@ -16,6 +16,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Newproduct from "./pages/dashboard/newproduct/Newproduct";
 import { createContext,useState } from "react";
 import Product from "./pages/products/Product";
+import { listCart } from "./actions/cartAction";
 
 
 export const productContext = createContext()
@@ -53,6 +54,7 @@ useEffect(()=>{ setProductCon(product)},[product])
     dispatch(listCategory())
     dispatch(listProduct())
     dispatch(listProductCategory())
+    dispatch(listCart())
    
 },[dispatch])
 useEffect(()=>{

@@ -8,6 +8,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { logout } from '../../actions/userAction';
 import Modals from '../modals/Modals';
 import { productContext } from '../../App';
+import { listCart } from '../../actions/cartAction';
+
 
 const Navbarr = () => {
   const dispatch = useDispatch()
@@ -19,6 +21,8 @@ const[isOpen,setIsOpen]=useState(false)
 const[isOpenCart,setIsOpenCart]=useState(false)
 const [cartItemOrder,setCartItemOrder] = useState(0)
 const [cartItem,setCartItem] = useState([])
+
+
 
 
 // console.log(productCon,'productCon')
@@ -53,7 +57,7 @@ useEffect(()=>{
 },[loadingCart,cartMessage,isOpenCart])
 
 
-console.log(typeof cartItem,'cartItem')
+// console.log(typeof cartItem,'cartItem')
 const userLogin = useSelector(state=>state.userLogin)
 const {error,loading,userInfo} = userLogin
 
@@ -70,17 +74,19 @@ const handlerDelete = (e)=>{
 
   const id = e.target.id
   const localcart = JSON.parse(localStorage.getItem('cartlist'))
-  const localcartt = JSON.parse(localStorage.getItem('cart'))
-  console.log(localcart,'localcart')
+  // const localcartt = JSON.parse(localStorage.getItem('cart'))
+  // console.log(localcart,'localcart')
   localStorage.setItem('cartlist',JSON.stringify( localcart.filter(item=>item.id !==id)))
-  localStorage.setItem('cart',JSON.stringify( localcartt.filter(item=>item.id !==id)))
+  // localStorage.setItem('cart',JSON.stringify( localcartt.filter(item=>item.id !==id)))
   setCartItem(JSON.parse(localStorage.getItem('cartlist')) )
+  dispatch(listCart())
   
 }
 useEffect(()=>{
   cartItem.map(item=> plus += item.order)
-  console.log(cartItem,'uu')
+  // console.log(cartItem,'uu')
   setCartItemOrder(plus )
+  // setCartItem(JSON.parse(localStorage.getItem('cartlist')) )
 },[cartItem])
 
 

@@ -21,7 +21,7 @@
 
 
 
-@media (min-width: 576px){
+/* @media (min-width: 576px){
 
     .col-sm-6 {
         flex: 0 0 auto;
@@ -51,7 +51,16 @@
     }
 }
 
+@media (min-width: 1400px){
 
+    .col-xxl-3 {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+ } */
+
+
+ /* juuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu */
 /* @media (min-width: 768px){
 
     .col-md-4 {

@@ -1,4 +1,4 @@
-import { ADD_CART_FAIL, ADD_CART_NULL, ADD_CART_REQUEST, ADD_CART_SUCCESS } from "../constants/cartConstant";
+import { ADD_CART_FAIL, ADD_CART_LIST_FAIL, ADD_CART_LIST_REQUEST, ADD_CART_LIST_SUCCESS, ADD_CART_NULL, ADD_CART_REQUEST, ADD_CART_SUCCESS } from "../constants/cartConstant";
 
 export const addCart = (_id,order) => async (dispatch) => {
     try {
@@ -33,3 +33,27 @@ export const addCart = (_id,order) => async (dispatch) => {
       });
     }
   };
+
+  
+export const listCart = () => async (dispatch) => {
+  try {
+    dispatch({ type: ADD_CART_LIST_REQUEST });
+ 
+
+    const listCart = await JSON.parse(localStorage.getItem('cartlist'))
+    
+    if(listCart) dispatch({ type: ADD_CART_LIST_SUCCESS, payload: listCart });
+
+   
+ 
+    // localStorage.setItem("cart", JSON.stringify(get));
+  } catch (error) {
+    dispatch({
+      type: ADD_CART_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
