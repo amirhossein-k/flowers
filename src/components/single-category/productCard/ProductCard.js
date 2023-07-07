@@ -271,7 +271,7 @@ const ProductCard = () => {
               })
               .map((item,index)=>{
               return(
-                  <div className=' col-11 col-sm-6 col-md-4 col-lg-2 ' key={index} onClick={(e) => navigate(`/product/${item._id}`)}>
+                  <div className=' col-11 col-sm-6 col-md-4 col-lg-2  m-0'  key={index} onClick={(e) => navigate(`/product/${item._id}`)}>
                     <div className='box'>
 
                       <div className='image-box'>

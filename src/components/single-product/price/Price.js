@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { productContext } from '../../../App';
 import { createRef } from 'react';
 import { memo } from 'react';
-
+import numberFormat from "number-formatierer";
 
 const Price = ({targetProduct}) => {
   const inputRef = createRef();
   const nameUrl = window.location.href;
   const [order,setOrder] = useState(0)
+  const [total_Price,setTotal_Price] = useState(0)
   const [orderCart,setOrderCart] = useState([])
 
   const { productId } = useParams();
@@ -64,11 +65,31 @@ const Price = ({targetProduct}) => {
         console.log(cartlist,'cartlist ones')
         setProductListTarget(t)
         
+        
+        // var total = 0
+        // for(let i =0; i<cartList.length ; i++){
+        //   total += cartlist[i].order * productListTarget[i].price
+        // }
+        // setTotal_Price(total)
+        
         // console.log(cartlist[0]?.order,'ttp6666666666')
     }
   },[cartList,productCon])
 
-  // useEffect(()=>{},[orderCart])
+  useEffect(()=>{
+    if(productListTarget?.length >0 ){
+      // console.log(cart)
+      var total = 0
+        for(let i =0; i<cartlist.length ; i++){
+          console.log(cartlist[i].order,'cartlist[i].order')
+          total += cartlist[i].order * productListTarget[i].price
+        }
+        const format =numberFormat(total)
+        setTotal_Price(format)
+        console.log(total_Price,'total_Price')
+    }
+    console.log(productListTarget?.length,'productListTargets')
+  },[productListTarget,productCon])
   
 
   var cart 
@@ -195,6 +216,22 @@ const Price = ({targetProduct}) => {
       }
 
   }
+  const reduceHandler = useCallback((e,index)=>{
+    console.log(order,'order')
+                                  
+                                  setOrderCart(prev=>{
+                                    return prev.map((itemm,indexx)=>{
+                                      if(indexx === index){
+                                        return {"order":itemm.order - 1,"id":e.target.id}
+                                      }else{
+                                        return {...itemm}
+                                      }
+                                    })
+                                  })
+                                  console.log(orderCart,'order 2')
+
+                          
+  },[orderCart,order])
 // ///////////////////////////////////////end cart list
   useEffect(()=>{
     // const cartorder =[]
@@ -321,7 +358,7 @@ const Price = ({targetProduct}) => {
                   {/* detail price & staus count */}
                   <div className='col-12 col-xl-3 col-lg-4 col-md-12 '>
                     <div className='row'>
-                      <div className='col-12'><p>{item.price} <span>تومان</span></p></div>
+                      <div className='col-12'><p>{numberFormat(item.price)} <span>تومان</span></p></div>
                       <div className='col-12'> <p>موجود در انبار</p> </div>
 
                       <div className='col-12'> 
@@ -358,7 +395,7 @@ const Price = ({targetProduct}) => {
                               </div>
                           
                                 <div className='inc'>
-                                  <i className="bi bi-dash" onClick={e=>setOrder(order-1)}></i>
+                                  <i className="bi bi-dash" onClick={e=>reduceHandler(e,index)}  id={item._id}></i>
                                 </div>
                           
                             </div>
@@ -375,7 +412,13 @@ const Price = ({targetProduct}) => {
                   <div className='col-12 col-xl-2 col-lg col-md-12'>
                     <div className='row h-100'>
                       <div className='col-12 d-flex justify-content-center'> جمع کل </div>
-                      <div className='col-12 d-flex justify-content-center'>  {cartlist[index]?.order * item.price}</div>
+                      <div className='col-12 d-flex justify-content-center'>
+                          { numberFormat(cartlist[index]?.order * item.price)}
+                          {/* {(()=>{
+                            // setTotal_Price(prev=> prev + cartlist[index]?.order * item.price)
+                            // console.log(total_Price,'total')
+                          })()} */}
+                      </div>
                     </div>
                   </div>
 
@@ -415,18 +458,18 @@ const Price = ({targetProduct}) => {
                   <div className='box-price'>
 
                     <span>قیمت کل	</span>
-                    <span>1,090,000 تومان</span>
+                    <span>{total_Price} تومان</span>
 
                   </div>
 
                   <div className='box-price'>
                     <span> پرداختی شما	</span>
-                    <span>1,090,000 تومان</span>
+                    <span>{total_Price} تومان</span>
                   </div>
 
                 </div>
 
-                <div className='button'>
+                <div className='button_cart' style={{padding: '3px 0'}}>
                   <a >ثبت سفارش</a>
                 </div>
 

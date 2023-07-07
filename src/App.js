@@ -17,6 +17,7 @@ import Newproduct from "./pages/dashboard/newproduct/Newproduct";
 import { createContext,useState } from "react";
 import Product from "./pages/products/Product";
 import { listCart } from "./actions/cartAction";
+import Profile from "./pages/profile/Profile";
 
 
 export const productContext = createContext()
@@ -77,6 +78,7 @@ useEffect(()=>{
       <Route path="/register" element={<Register/>}/>
       <Route path="/modal" element={<Modals/>}/>
       <Route element={<ProtectedRoute userInfo={userInfo} />}>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="/dashboard">
           <Route index element={<Dashboard/>} />
           <Route path="products">

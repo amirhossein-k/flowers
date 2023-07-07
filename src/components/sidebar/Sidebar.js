@@ -8,7 +8,12 @@ import styles from './sidebar.module.scss'
 import { NavLink } from 'react-router-dom';
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-const Sidebar = () => {
+import { useState } from 'react';
+import Information from '../profile/information/Information';
+const Sidebar = ({openHandlerCallback}) => {
+
+
+    const nameUrl = window.location.href
     const menuItem = [
         {
           path: "/dashboard",
@@ -32,6 +37,36 @@ const Sidebar = () => {
         },
           
     ]
+    const menuProfile =  [
+        {
+        
+          path: "/dashboard",
+          title:'Information',
+          name: "اطلاعات کاربری",
+          icon: <i className={`${styles.icon} bi bi-person-vcard`} ></i>,
+        },
+        {
+            path: "/dashboard/products",
+            title:'Address',
+            name: "ادرس",
+            icon: <i className={`${styles.icon} bi bi-geo-alt`}></i>,
+        },
+        {
+            path: "/dashboard/products/new",
+            title:'History',
+            name: "تاریخچه خرید",
+            icon: <i className={`${styles.icon} bi bi-bag`}></i>,
+        },
+        {
+            path: "/",
+            title:'Home',
+            name: "صفحه اصلی سایت",
+            icon: <HomeIcon className={styles.icon} />,
+        },
+          
+    ]
+
+
   return (
     // <Container fluid style={{margin:"0 !important",padding:"0 !important" ,height:"100%"}}>
         
@@ -39,7 +74,7 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
         <div className={`row ${styles.center}`} style={{margin:"0 !important" ,'--bs-gutter-x': '0rem'}}>
             <ul>
-                {menuItem.map((item,index)=>(
+                {nameUrl !== 'http://localhost:3000/profile' ?  menuItem.map((item,index)=>(
                     <li key={index} id={item.name}>
                         <NavLink to={item.path} className={styles.link}>
                             <div className={styles.icon}>{item.icon}</div>
@@ -49,7 +84,28 @@ const Sidebar = () => {
                         </NavLink>
                         <ReactTooltip anchorId={item.name} place="bottom" content={item.name} className='d-xxl-none d-xl-none d-lg-none'/>
                     </li>
-                ))}
+                )) : menuProfile.map((item,index)=>(
+                    <li key={index} id={item.name} className={`${styles.profile}`}>
+                        <NavLink 
+                        // to={item.path}
+                         className={styles.link} style={{color:'#fff'}} id={item.title}
+                        //  onClick={e=>openHandler(e,item.title)}
+                        onClick={e=>openHandlerCallback(item.title)}
+                         >
+                            {/* <div className={styles.link} style={{color:'#fff'}}> */}
+                                <div className={styles.icon} >{item.icon}</div>
+                                <div className={styles.link_text}>
+                                    {item.name}
+                                {/* </div> */}
+
+                            </div>
+                        </NavLink>
+                        <ReactTooltip anchorId={item.name} place="bottom" content={item.name} className='d-xxl-none d-xl-none d-lg-none'/>
+                    </li>
+                ))
+            
+            }
+
             </ul>
         </div>
     </div>
