@@ -6,7 +6,10 @@ import {
   USER_LOGOUT_FAIL,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS
+  USER_REGISTER_SUCCESS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL
 } from "../constants/userConstant";
 
 import axios from "axios";
@@ -22,7 +25,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axios.post(
       "http://localhost:9000/api/users/login",
       { email, password },
       config
@@ -40,23 +43,43 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-// logout
+// updsate
 
-// export const logout = ()=> async(dispatch)=>{
-//   try {
-//     localStorage.removeItem("userInfo");
-//     dispatch({ type: USER_LOGOUT,payload: action.payload });
-//   } catch (error) {
-//     dispatch({
-//       type: USER_LOGOUT_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
+export const updateUser = (name,family,phone_number,email,password)=> async(dispatch,getState)=>{
+  try {
+    // localStorage.removeItem("userInfo");
 
-// }
+    dispatch({ type: USER_UPDATE_REQUEST});
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const {data} = await axios.put('http://localhost:9000/api/users/update',{name,family,phone_number,email,password},config)
+
+    console.log(data,'data')
+    dispatch({ type: USER_UPDATE_SUCCESS,payload:data });
+
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
+
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+
+}
 
 export const logout = () => async (dispatch) => {
   localStorage.removeItem("userInfo");

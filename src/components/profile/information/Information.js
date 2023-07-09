@@ -1,16 +1,57 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { showToast } from '../../../actions/toastAction'
+import { updateUser } from '../../../actions/userAction'
 import { productContext } from '../../../App'
 import styles from './informtion.module.scss'
-const Information = () => {
+const Information = ({setDone}) => {
+    const dispatch = useDispatch()
     const [productCon , setProductCon] = useContext(productContext)
     const userLogin = useSelector(state=>state.userLogin)
     const {error,loading,userInfo} = userLogin
-    console.log(userInfo,'user')
+    // console.log(userInfo,'user')
+    const userupdate = useSelector(state=>state.userUpdate)
+    const {userInfo:userInfoUpdate} = userupdate
 
+
+    // useEffect(()=>{
+    //     if(userInfoUpdate){
+    //      setDone(true)
+    //         console.log('done info')
+    //     }
+    // },[userInfoUpdate])
+    // 
+    
+    // 
+
+    const [ name , setName ] = useState()
+    const [ family , setFamily ] = useState()
+    const [ phone_number , setPhone_Number ] = useState()
+    const [ email , setEmail ] = useState()
+    const [ password , setPassword ] = useState()
     const [edite,setEdite]= useState(false)
+
+    useEffect(() => {
+       if(userInfo){
+        setEmail(userInfo.email)
+        setFamily(userInfo.detail[0].family)
+        setName(userInfo.name)
+        setPhone_Number(userInfo.detail[0].phone_number)
+        setPassword(userInfo?.password)
+       }
+    }, [userInfo]);
+    // useEffect(()=>{
+    //     console.log('family',family)
+    // },[name,email,password,family,phone_number])
+
+    const submitUpdate = async(e)=>{
+        e.preventDefault();
+console.log(family,'name')
+        dispatch(updateUser(name,family,phone_number,email))
+        dispatch(showToast('اپدیت شد'))
+    }
 
     const items = [
         {
@@ -44,12 +85,11 @@ const Information = () => {
                                     <div className={`col-12 ${styles.item_child} ${!edite ? 'd-flex' : 'd-none'}`}>{
                                     (()=>{
                                         switch(item.title){
-                                            case 'نام':
-                                             return   userInfo.name
+                                           
                                             case 'نام':
                                               return  userInfo.name
                                             case 'شماره تماس':
-                                              return  userInfo.phone_number
+                                              return  userInfo.detail[0].phone_number
                                             case 'ایمیل':
                                               return  userInfo.email;
                                             case 'رمز':
@@ -62,7 +102,24 @@ const Information = () => {
                                     })()
                                     }</div>
                                     <div className={`col-12 ${styles.item_child} ${edite ? 'd-flex' : 'd-none'}`}>
-                                            <input className={`${styles.effect_19}`} type="text" placeholder=""/>
+                                        {(()=>{
+                                            switch(item.title){
+                                                case 'نام':
+                                             return   <input className={`${styles.effect_19}`} type="text" placeholder="" value={name}  onChange={e=>setName(e.target.value)}/>
+                                    
+                                            case 'شماره تماس':
+                                              return  <input className={`${styles.effect_19}`} type="text" placeholder="" value={phone_number} onChange={e=>setPhone_Number(e.target.value)}/>
+                                            case 'ایمیل':
+                                              return  <input className={`${styles.effect_19}`} type="text" placeholder="" value={email} onChange={e=>setEmail(e.target.value)}/>
+                                            case 'رمز':
+                                              return  'haha';
+                                            case 'نام خانوادگی':
+                                             return   <input className={`${styles.effect_19}`} type="text" placeholder="" value={family} onChange={e=>setFamily(e.target.value)}/>
+                                             default:
+                                                return ''
+                                            }
+                                        })([family])}
+                                            {/* <input className={`${styles.effect_19}`} type="text" placeholder=""/> */}
                                             <label> {item.title}</label>
                                             <span className={`${styles.focus_border}`}>
                                                 <i></i>
@@ -76,7 +133,11 @@ const Information = () => {
             })
         }
 
-
+        <div className={`col-10 col-lg-5 ${edite ? 'd-block': 'd-none'}`} >
+            <div className={`${styles.container_botton} justify-content-xl-start justify-content-lg-start justify-content-md-center justify-content-center`}>
+                <button onClick={e=>submitUpdate(e)}>اپدیت </button>
+            </div>
+        </div>
         
     </div>
   )

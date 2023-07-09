@@ -85,12 +85,12 @@ const Sidebar = ({openHandlerCallback}) => {
                         <ReactTooltip anchorId={item.name} place="bottom" content={item.name} className='d-xxl-none d-xl-none d-lg-none'/>
                     </li>
                 )) : menuProfile.map((item,index)=>(
-                    <li key={index} id={item.name} className={`${styles.profile}`}>
+                    <li key={index} id={item.name} className={`${styles.profile}`} onClick={e=>openHandlerCallback(item.title)}>
                         <NavLink 
                         // to={item.path}
                          className={styles.link} style={{color:'#fff'}} id={item.title}
                         //  onClick={e=>openHandler(e,item.title)}
-                        onClick={e=>openHandlerCallback(item.title)}
+                        
                          >
                             {/* <div className={styles.link} style={{color:'#fff'}}> */}
                                 <div className={styles.icon} >{item.icon}</div>

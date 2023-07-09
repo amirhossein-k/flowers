@@ -1,16 +1,14 @@
+.address_container{
+    z-index:1;
 
-.information_container{
-z-index:1;
     .edite{
         display: flex;
         justify-content: end;
         position: absolute;
         left: 12px;
         top: 6px;
-        
-        
-        
-        
+       
+
         .normal{
             cursor: pointer;
             // background: #03f4f8;
@@ -39,17 +37,25 @@ z-index:1;
                 background:#ca3232eb;
             }
         }
-        
-       
     }
-    .item{
-        height: 100%;
-        .item_title{
+
+    .container_item{
+        gap: 40px;
+
+        .i{
             display: flex;
             justify-content: center;
-            align-items: flex-start;    
+            align-items: center;
+            font-size: 20px;
         }
         .item_child{
+            gap: 12px;
+
+            .item_child_box{
+                gap: 10px;
+            }
+        }
+        .item_child_input{
             display: flex;
              justify-content: center;
              align-items: center;
@@ -77,31 +83,6 @@ z-index:1;
              .has-content.effect_19 ~ .focus_border i:after{top: -1px; height: 100%; transition: 0.6s;}
              .effect_19 ~ label{position: absolute; left: -2px; width: 100%; top: 10px; color: #aaa; transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
              .effect_19:focus ~ label, .has-content.effect_19 ~ label{top: -22px;font-size: 15px;font-weight: 500; left: 0;  color: #03bff8; transition: 0.3s;}
-        }
-        
-      
-    }
-    .container_botton{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        
-        button{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px 29px;
-            border: none;
-            outline: #4ae6e2 solid;
-            background-color: cyan;
-            box-shadow: 0px 0px 5px;
-            border-radius: 1px;
-            transition: background-color 0.3s ease-in;
-        }
-        button:hover{
-            background-color: rgb(12, 206, 206);
-            outline: #d5d5d5db solid;
-            transition: outline 0.2s ease-out;
         }
     }
 }

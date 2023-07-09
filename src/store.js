@@ -2,9 +2,10 @@ import {combineReducers, createStore,applyMiddleware} from 'redux'
 import { composeWithDevTools } from '@redux-devtools/extension'
 import thunk from 'redux-thunk'
 import {categoryListReducer,categoryListProductReducer} from './reducer/categoryReducer'
-import {logoutReducer,userLoginReducer, userRegister}from './reducer/userReducer'
+import {logoutReducer,userLoginReducer, userRegister, userUpdateReducer}from './reducer/userReducer'
 import { productCreateReducer, productListReducder } from './reducer/productReducer'
 import { addCart, listCart } from './reducer/cartReducer'
+import { toastReducer } from './reducer/toastReducer'
 
 const reducer = combineReducers({
     categoryList : categoryListReducer,
@@ -12,10 +13,12 @@ const reducer = combineReducers({
     userLogin: userLoginReducer,
     logout: logoutReducer,
     userRegister: userRegister,
+    userUpdate: userUpdateReducer,
     productList:productListReducder,
     productCreate:productCreateReducer,
     cart: addCart,
-    listCart: listCart
+    listCart: listCart,
+    Toast:toastReducer
 
 })
 const midlleware = [thunk]
