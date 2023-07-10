@@ -59,6 +59,7 @@ const FormBuy = () => {
         <Form className='row form'>
           {/* col 1 */}
           <div className='col-12 col-md-6'>
+            {/* سفارش دهنده */}
             <div className='box-dahande'>
               <span className='title'>اطلاعات سفارش دهنده</span>
               <Form.Group controlId='name'>
@@ -75,7 +76,7 @@ const FormBuy = () => {
               </Form.Group>
 
             </div>
-
+            {/*  سفارش گیرنده*/}
             <div className='box-girandeh'>
             <span className='title'>اطلاعات تحویل گیرنده </span>
 
