@@ -9,7 +9,8 @@ import {
   USER_REGISTER_SUCCESS,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL
+  USER_UPDATE_FAIL,
+  USER_UPDATE_NULL
 } from "../constants/userConstant";
 
 import axios from "axios";
@@ -45,7 +46,7 @@ export const login = (email, password) => async (dispatch) => {
 
 // updsate
 
-export const updateUser = (name,family,phone_number,email,password)=> async(dispatch,getState)=>{
+export const updateUser = (name,family,phone_number,email,password,address)=> async(dispatch,getState)=>{
   try {
     // localStorage.removeItem("userInfo");
 
@@ -60,12 +61,32 @@ export const updateUser = (name,family,phone_number,email,password)=> async(disp
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const {data} = await axios.put('http://localhost:9000/api/users/update',{name,family,phone_number,email,password},config)
+    // const d = {}
+    // if(name !== ''){
+    //   d.name = name
+    // }else if( family !== ''){
+    //   d.family = family
+    // }else if(phone_number !== ''){
+    //   d.phone_number =phone_number
+    // }else if(email !== ''){
+    //   d.email = email
+    // }else if(password !== ''){
+    //   d.password = password
+    // }else if(address !== ''){
+    //   d.address = address
+    // }
+    // axios.put('fff',)
+    console.log(name,'name action')
+    console.log(address,'addres action')
+    const {data} = await axios.put('http://localhost:9000/api/users/update',{name,family,phone_number,email,password,address},config)
+    // const {data} = await axios.put('http://localhost:9000/api/users/update',d,config)
 
     console.log(data,'data')
     dispatch({ type: USER_UPDATE_SUCCESS,payload:data });
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+
+    dispatch({type: USER_UPDATE_NULL})
 
     localStorage.setItem("userInfo", JSON.stringify(data));
 

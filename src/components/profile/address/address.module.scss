@@ -85,4 +85,31 @@
              .effect_19:focus ~ label, .has-content.effect_19 ~ label{top: -22px;font-size: 15px;font-weight: 500; left: 0;  color: #03bff8; transition: 0.3s;}
         }
     }
+    .container_botton{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+        button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 29px;
+            border: none;
+            outline: #4ae6e2 solid;
+            background-color: cyan;
+            box-shadow: 0px 0px 5px;
+            border-radius: 1px;
+            transition: background-color 0.3s ease-in;
+        }
+        button:hover{
+            background-color: rgb(12, 206, 206);
+            outline: rgb(176 197 217 / 70%) solid;
+            transition: outline 0.2s ease-out;
+        }
+    }
+}
+
+.cursor{
+    cursor: default;
 }

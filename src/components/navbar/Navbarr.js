@@ -97,10 +97,10 @@ useEffect(()=>{
     <Container fluid >  
     <Navbar.Brand >
           <Nav className='left-nav'>
-            <Link  className='nav-link' >
+            <Link  className='nav-link' onClick={()=>setIsOpen(true)}>
               <i
                className="bi bi-cart"
-               onClick={()=>setIsOpen(true)}
+               
                >
                 <span className='i_numbers'>{cartItem.length>0 &&cartItemOrder &&  cartItemOrder.length > 0?  cartItemOrder : cartItemOrder}</span>
                </i>
