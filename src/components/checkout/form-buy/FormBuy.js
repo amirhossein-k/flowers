@@ -1,8 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Nav } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import Register from '../../../pages/register/Register'
 import './formbuy.css'
+import styles from './formbuy.module.scss'
+import '../../../pages/register/register.css'
+import { Link } from 'react-router-dom'
 const FormBuy = () => {
+
+  const userLogin = useSelector(state=>state.userLogin)
+  const {userInfo} = userLogin
+
   const [active,setActive]= useState(false)
 
   const [finalCart, setFinalCart] = useState([
@@ -57,10 +66,12 @@ const FormBuy = () => {
     <div className='formbuy-container row' dir='rtl'>
       <div className='col-12 form-container'>
         <Form className='row form'>
-          {/* col 1 */}
           <div className='col-12 col-md-6'>
+          {/* col 1 */}
             {/* سفارش دهنده */}
-            <div className='box-dahande'>
+          {userInfo  ? (
+            <>
+              <div className='box-dahande'>
               <span className='title'>اطلاعات سفارش دهنده</span>
               <Form.Group controlId='name'>
                 <Form.Label>نام:</Form.Label>
@@ -78,7 +89,7 @@ const FormBuy = () => {
             </div>
             {/*  سفارش گیرنده*/}
             <div className='box-girandeh'>
-            <span className='title'>اطلاعات تحویل گیرنده </span>
+              <span className='title'>اطلاعات تحویل گیرنده </span>
 
              <Form.Group controlId='name'>
                 <Form.Label>شهر:</Form.Label>
@@ -101,6 +112,24 @@ const FormBuy = () => {
             <div className='box-moredetail'>
               توضحیات بیشتر ارسال
             </div>
+            </>
+          ) : (
+            <div className={`row ${styles.contianer_register}`}>
+              <div className={`col-12`}>لطفا برای انجام پرداخت وارد حساب کاربری خود شودید </div>
+              <div className={`col-12`}>
+              <Link  to={{
+                pathname: '/register'
+                }} state={{ title: false }}>ورود به حساب کاربری</Link>  
+              </div>
+              <div className={`col-12`}>
+              <Link  to={{
+                pathname: '/register'
+                }} state={{ title: true }}>ساخت حساب کاربری</Link>  
+              </div>
+            </div>
+          ) }
+          
+            
 
           </div>
           {/* col 2 */}

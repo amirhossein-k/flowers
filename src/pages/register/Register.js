@@ -2,27 +2,45 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, Form, Container } from "react-bootstrap";
 import { useDispatch,useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { login,register } from "../../actions/userAction";
 import Navbarr from "../../components/navbar/Navbarr";
 import "./register.css";
 
-const Register = () => {
+const Register = (props) => {
+  const location = useLocation()
+ 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  // useEffect(()=>{})
   const [singup, setSingup] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [personName, setPersonName] = useState('');
+  const [ checkOutFrom ,setCheckOutFrom]  =useState(false)
 
   const userLogin = useSelector(state=>state.userLogin)
   const {error,loading,userInfo} = userLogin
   useEffect(()=>{
     if(userInfo)
-      navigate('/')
+      if(location.state){
+        navigate('/checkout')
+      }else{
+
+        navigate('/')
+      }
   },[userInfo])
 
+  useEffect(()=>{
+  
+    if(location.state){
+
+      setSingup(location.state.title)
+
+    }
+  },[location,checkOutFrom])
+ 
   // login
   const loginHandler = async(e)=>{
     e.preventDefault()
@@ -36,6 +54,7 @@ const Register = () => {
 
   }
   return (
+    // {checkout ? () : ()}
     <Container fluid style={{margin:"0 !important",padding:"0 !important" ,height: '100%',
     minHeight: '100vh'}}>
       <header>
@@ -46,7 +65,7 @@ const Register = () => {
       <div className="title-text">
         <div
           className="title login"
-          style={singup ? { marginLeft: "-50%" } : { marginLeft: "0%" }}
+          style={singup  ? { marginLeft: "-50%" } : { marginLeft: "0%" }}
         >
           ورود{" "}
         </div>
@@ -57,9 +76,9 @@ const Register = () => {
           <input type="radio" name="slide" id="login" checked />
           <label
             htmlFor="login"
-            className="slide login"
+            className={`slide login `}
             style={
-              !singup
+              !singup 
                 ? { color: "#fff", cursor: "default" }
                 : { color: "#000", cursor: "pointer" }
             }
@@ -72,7 +91,7 @@ const Register = () => {
             htmlFor="login"
             className="slide signup"
             style={
-              singup
+              singup 
                 ? { color: "#fff", cursor: "default" }
                 : { color: "#000", cursor: "pointer" }
             }
@@ -86,12 +105,12 @@ const Register = () => {
         </div>
         <div
           className="form-inner"
-          style={singup ? { height: 414 } : { height: 250 }}
+          style={singup  ? { height: 414 } : { height: 250 }}
         >
           <Form
           onSubmit={loginHandler}
             className="login"
-            style={singup ? { marginLeft: "-50%" } : { marginLeft: "0%" }}
+            style={singup  ? { marginLeft: "-50%" } : { marginLeft: "0%" }}
           >
             <pre></pre>
             <div className="field">

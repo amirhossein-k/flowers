@@ -240,3 +240,10 @@ form .btn .btn-layer{
     justify-content: center;
     align-items: inherit;
   }
+
+  .h{
+    color: "#fff"; cursor: "default";
+  }
+  .s{
+    color: "#000";cursor: "pointer" ;
+  }
