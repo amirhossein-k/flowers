@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Form, Nav } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
@@ -11,8 +11,24 @@ const FormBuy = () => {
 
   const userLogin = useSelector(state=>state.userLogin)
   const {userInfo} = userLogin
-
+  const [edite,setEdite]= useState(false)
   const [active,setActive]= useState(false)
+  const [name,setName]= useState('')
+  const [phone_number,setPhone_Number]= useState('')
+  const [family,setFamily]= useState('')
+  const [fullName,setFullName]= useState('')
+  const [location,setLocation]= useState('')
+  
+  useEffect(() => {
+    if(userInfo){
+  
+     setFamily(userInfo.detail[0].family)
+     setName(userInfo.name)
+     setPhone_Number(userInfo.detail[0].phone_number)
+     setLocation(userInfo.detail[0].address[0].location)
+
+    }
+ }, [userInfo])
 
   const [finalCart, setFinalCart] = useState([
     {title:'1سبد گل',count:2,price:2100,id:1},
@@ -62,6 +78,16 @@ const FormBuy = () => {
       })
     })
   }
+  const list = [
+    {"title":"نام و نام خوانوادگی"},
+    {"title":'محل تحویل'},
+    {"title":"تلفن همراه"},
+    
+  ]
+
+  const submitHandler = ()=>{
+    
+  }
   return (
     <div className='formbuy-container row' dir='rtl'>
       <div className='col-12 form-container'>
@@ -71,46 +97,82 @@ const FormBuy = () => {
             {/* سفارش دهنده */}
           {userInfo  ? (
             <>
-              <div className='box-dahande'>
-              <span className='title'>اطلاعات سفارش دهنده</span>
-              <Form.Group controlId='name'>
-                <Form.Label>نام:</Form.Label>
-                <Form.Control type='text' placeholder='نام و نام خانوادگی شما' />
-              </Form.Group>
-              <Form.Group controlId='phone'>
-                <Form.Label >تلفن همراه:</Form.Label>
-                <Form.Control type='text' placeholder='تلفن همراه(به انگیلسی وارد شود)' />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>ادرس ایمیل</Form.Label>
-                <Form.Control  type='text' placeholder='الزامی'/>
-              </Form.Group>
+              <div className='box-dahande row'>
+                <span className='title'>اطلاعات سفارش دهنده</span>
+                <div className={`${styles.formbuy_datail} row`}>
+                <div className={`col-12  ${styles.edite} `} > <div className={`${edite ? styles.cancel : styles.normal}`}  onClick={e=>setEdite(!edite)}> {edite ? 'انصراف' : "ویرایش اطلاعات"}</div></div>
+             {list.map(item=>{
+              return(
+                <div className='col-12 col-lg-8'>
+                <div className='row w-100 '>
+
+                  <div className='col-3 col-md-4'>{item.title}</div>
+                  <div className='col-5 col-lg-4 col-md-4'>
+                    <div className='row'>
+                      <div className={`col-12 ${styles.item_child} ${!edite ? 'd-flex' : 'd-none'}`}> 
+                        {(()=>{
+                          switch(item.title){
+                            case "نام و نام خوانوادگی":
+                              return userInfo.name + userInfo.detail[0].family
+                            case 'محل تحویل':
+                              return userInfo.detail[0].address[0].location
+                            case "تلفن همراه":
+                              return userInfo.detail[0].phone_number
+                            default:
+                              return ''
+                          }
+                        })()}
+                       </div>
+                       <div className={`col-12 ${styles.item_child} ${edite ? 'd-flex' : 'd-none'}`}>
+                          {(()=>{
+                             switch(item.title){
+                              case "نام و نام خوانوادگی":
+                                return <input className={`${styles.effect_19}`} type="text" placeholder="" value={name + family}  onChange={e=>setFullName(e.target.value)}/>
+                              case 'محل تحویل':
+                                return  <textarea 
+                                className={`${styles.effect_19} w-100`}  value={location}  onChange={e=>setLocation(e.target.value)}
+                                name="story"
+                                        rows={2} >
+                              
+                                </textarea>
+                              case "تلفن همراه":
+                                return <input className={`${styles.effect_19}`} type="text" placeholder="" value={phone_number}  onChange={e=>setPhone_Number(e.target.value)}/>
+                              default:
+                                return ''
+                            }
+                          })()}
+                                   
+                          <label> {item.title}</label>
+                           <span className={`${styles.focus_border}`}>
+                               <i></i>
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              )
+             })}
+             
+             </div>
+              
+             
 
             </div>
-            {/*  سفارش گیرنده*/}
-            <div className='box-girandeh'>
-              <span className='title'>اطلاعات تحویل گیرنده </span>
+          
+           
 
-             <Form.Group controlId='name'>
-                <Form.Label>شهر:</Form.Label>
-                <Form.Control type='text' placeholder='نام شهر گیرنده را انتخاب کنید' />
-              </Form.Group>
-              <Form.Group controlId='phone'>
-                <Form.Label >ادرس گیرنده:</Form.Label>
-                <Form.Control type='text' placeholder='ادرس محل تحویل' />
-              </Form.Group>
-              <Form.Group controlId='name'>
-                <Form.Label>نام:</Form.Label>
-                <Form.Control type='text' placeholder='نام و نام خانوادگی شما' />
-              </Form.Group>
-              <Form.Group controlId='phone'>
-                <Form.Label >تلفن همراه:</Form.Label>
-                <Form.Control type='text' placeholder='تلفن همراه(به انگیلسی وارد شود)' />
-              </Form.Group>
-            </div>
-
-            <div className='box-moredetail'>
-              توضحیات بیشتر ارسال
+            <div className='row'>
+              <div className='col-12 col-md-8'>
+              <textarea 
+                                className={`${styles.effect_19} w-100`}  value={location}  onChange={e=>setLocation(e.target.value)}
+                                name="story"
+                                        rows={2} >
+                              
+                                </textarea>
+              </div>
+             
             </div>
             </>
           ) : (
@@ -166,12 +228,12 @@ const FormBuy = () => {
                 <div className='transfer row'>
                   <div className='col-12 box_transfer'>
                     
-                    <input type='radio' value='40' name='transfer'  onChange={(e)=>handleChange(e)}/> <span>هزینه حمل 30 هزار تومن</span>
+                    <input className='d-block' type='radio' value='40' name='transfer'  onChange={(e)=>handleChange(e)}/> <span>هزینه حمل 40 هزار تومن</span>
                   </div>
 
                   <div className='col-12 box_transfer'>
 
-                    <input type='radio' value='30' name='transfer'  onChange={(e)=>handleChange(e)}/> <span>هزینه حمل 30 هزار تومن</span>
+                    <input className='d-block' type='radio' value='30' name='transfer'  onChange={(e)=>handleChange(e)}/> <span>هزینه حمل 30 هزار تومن</span>
                   </div>
                 </div>
 
@@ -235,7 +297,7 @@ const FormBuy = () => {
                 <span>من <span className='rull'>شرایط و قوانین</span> را خواندم و آن را می پذیرم. *</span>
               </div>
               <div className='submitt'>
-                <button type='submit'>پرداخت و ثبت نهایی سفارش</button>
+                <button type='submit' onClick={submitHandler}>پرداخت و ثبت نهایی سفارش</button>
               </div>
             </div>
           </div>
